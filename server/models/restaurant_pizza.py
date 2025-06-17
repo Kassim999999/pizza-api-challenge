@@ -1,4 +1,4 @@
-from . import db
+from server.models import db
 from sqlalchemy.orm import relationship
 from sqlalchemy import CheckConstraint
 
@@ -6,7 +6,7 @@ class RestaurantPizza(db.Model):
     __tablename__ = 'restaurant_pizzas'
 
     id = db.Column(db.Integer, primary_key=True)
-    prize = db.Column(db.Float, nullable=False)
+    price = db.Column(db.Float, nullable=False)
 
     restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurants.id'), nullable=False)
     pizza_id = db.Column(db.Integer, db.ForeignKey('pizzas.id'), nullable=False)

@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify, request
-from models import db
-from models.restaurant import Restaurant
-from models.restaurant_pizza import RestaurantPizza
-from models.pizza import Pizza
+from server.models import db
+from server.models.restaurant import Restaurant
+from server.models.restaurant_pizza import RestaurantPizza
+from server.models.pizza import Pizza
 
 restaurant_bp = Blueprint('restaurants', __name__)
 

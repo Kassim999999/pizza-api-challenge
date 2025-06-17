@@ -1,8 +1,8 @@
 from flask import Flask
-from models import db
-from controllers.restaurants_controller import restaurant_bp
-from controllers.pizzas_controller import pizza_bp
-from controllers.restaurant_pizzas_controller import restaurant_pizza_bp
+from server.models import db
+from server.controllers.restaurant_controller import restaurant_bp
+from server.controllers.pizza_controller import pizza_bp
+from server.controllers.restaurant_pizza_controller import restaurant_pizza_bp
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'

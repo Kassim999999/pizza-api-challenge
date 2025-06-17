@@ -1,16 +1,15 @@
+from server.models import db
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from .models import db 
-from .controllers import register_controllers  # This should import a function that registers all Blueprints
+from server.controllers import register_controllers
 
-app = Flask(__name__)
-app.config.from_object("server.config")  # Your config file (e.g., database URI)
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object("server.config")
 
-db.init_app(app)
-migrate = Migrate(app, db)
+    db.init_app(app)
+    migrate = Migrate(app, db)
+    register_controllers(app)
 
-register_controllers(app)  # Register all controllers (blueprints)
-
-if __name__ == "__main__":
-    app.run(debug=True)
+    return app

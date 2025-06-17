@@ -1,11 +1,18 @@
 from flask import Flask
-from models import db
-from models.restaurant import Restaurant
-from models.pizza import Pizza
-from models.restaurant_pizza import RestaurantPizza
+from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy()
 
-db.init_app(app)
+from server.models.restaurant import Restaurant
+from server.models.pizza import Pizza
+from server.models.restaurant_pizza import RestaurantPizza
+
+
+def create_app():
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    db.init_app(app)
+
+    return app
