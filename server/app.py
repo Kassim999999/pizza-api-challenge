@@ -1,20 +1,19 @@
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from .models import db 
-from .controllers import register_controllers
+from models import db
+from controllers.restaurants_controller import restaurant_bp
+from controllers.pizzas_controller import pizza_bp
+from controllers.restaurant_pizzas_controller import restaurant_pizza_bp
 
 app = Flask(__name__)
-app.config.from_object("server.config")
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
-migrate = Migrate(app, db)
 
-register_controllers(app)
+# Register blueprints
+app.register_blueprint(restaurant_bp)
+app.register_blueprint(pizza_bp)
+app.register_blueprint(restaurant_pizza_bp)
 
-
-app.config.from_object("server.config")
-
-
-if __name__ == "__main__":
-    app.run()
+if __name__ == '__main__':
+    app.run(debug=True)
